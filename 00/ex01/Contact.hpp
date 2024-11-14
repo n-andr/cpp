@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 00:41:44 by nandreev          #+#    #+#             */
-/*   Updated: 2024/11/10 00:58:50 by nandreev         ###   ########.fr       */
+/*   Updated: 2024/11/14 01:36:19 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define CONTACT_HPP
 
 # include <string>
+
+// attributes are private, we don't want everyone to know the darkest secrets :) 
 
 class	Contact {
 	private:
