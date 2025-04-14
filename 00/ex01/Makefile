@@ -6,7 +6,7 @@
 #    By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/01 21:16:06 by nandreev          #+#    #+#              #
-#    Updated: 2024/11/09 00:06:56 by nandreev         ###   ########.fr        #
+#    Updated: 2025/04/14 18:01:36 by nandreev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,12 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Source files
-SRCS = .cpp
+SRCS = main.cpp PhoneBook.cpp Contact.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
 # Executable name
-NAME = 
+NAME = phonebook
 
 all: $(NAME)
 

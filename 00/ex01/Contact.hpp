@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/10 00:41:44 by nandreev          #+#    #+#             */
-/*   Updated: 2025/03/26 23:12:25 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/04/14 18:12:47 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,11 @@ class	Contact {
 		std::string getDarkestSecret();
 		
 		//setters
-		std::string setFirstName();
-		std::string setLastName();
-		std::string setNickname();
-		std::string setPhoneNumber();
-		std::string setDarkestSecret();
-
-		void fillContact();
+		void setFirstName(const std::string str);
+		void setLastName(const std::string str);
+		void setNickname(const std::string str);
+		void setPhoneNumber(const std::string str);
+		void setDarkestSecret(const std::string str);
 };
 
 #endif

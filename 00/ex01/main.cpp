@@ -1,43 +1,41 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/06 23:16:22 by nandreev          #+#    #+#             */
+/*   Updated: 2025/04/14 19:37:17 by nandreev         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 #include <iostream>
 
-void Contact::fillContact()
-{
-	std::string input;
+int main() {
+	PhoneBook myAwesomePhoneBook;
+	std::string command;
 
-	// First name
-	do {
-		std::cout << "Enter First Name: "; 
-		std::getline(std::cin, input);
-	} while (input.empty());
-	firstName = input;
+	std::cout << "Welcome to My Awesome PhoneBook!" << std::endl;
+	std::cout << "The program only accepts ADD, SEARCH and EXIT" << std::endl;
 
-	// Last Name
-    do {
-        std::cout << "Enter Last Name: ";
-        std::getline(std::cin, input);
-    } while (input.empty());
-    lastName = input;
+	while (true)
+	{
+		std::cout << "Enter command: ";
+        std::getline(std::cin, command);
 
-    // Nickname
-    do {
-        std::cout << "Enter Nickname: ";
-        std::getline(std::cin, input);
-    } while (input.empty());
-    nickname = input;
-
-    // Phone Number
-    do {
-        std::cout << "Enter Phone Number: ";
-        std::getline(std::cin, input);
-    } while (input.empty());
-    phoneNumber = input;
-
-    // Darkest Secret
-    do {
-        std::cout << "Enter Darkest Secret: ";
-        std::getline(std::cin, input);
-    } while (input.empty());
-    darkestSecret = input;
+		if (command == "ADD"){
+			myAwesomePhoneBook.addContact();
+		} else if(command == "SEARCH") {
+			myAwesomePhoneBook.search();
+		} else if(command == "EXIT") {
+			std::cout << "Goodbye!" << std::endl;
+            break;
+		} else
+			std::cout << "Unknown command. Please use ADD, SEARCH, or EXIT." << std::endl;
+	}
+	return 0;
+	
 }
