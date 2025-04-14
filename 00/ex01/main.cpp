@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/06 23:16:22 by nandreev          #+#    #+#             */
-/*   Updated: 2025/04/14 19:37:17 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/04/14 20:24:33 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int main() {
 			myAwesomePhoneBook.addContact();
 		} else if(command == "SEARCH") {
 			myAwesomePhoneBook.search();
-		} else if(command == "EXIT") {
+		} else if(std::cin.eof() || command == "EXIT") {
 			std::cout << "Goodbye!" << std::endl;
             break;
 		} else
