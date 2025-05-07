@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/06 01:21:10 by nandreev          #+#    #+#             */
-/*   Updated: 2025/05/07 00:52:08 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/05/07 01:35:03 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,17 @@
 
 //std::ifstream input(path);  A C++ input file stream class. It owns the OS file descriptor and closes it automatically when the object is destroyed (RAII).
 
-static std::string readFile(const char *path){
+static bool readFile(const char *path, std::string& content){
 	
 	
 	std::ifstream input(path); 
 	
 	if (!input){
 		std::cerr << "Error opening file " << std::endl;
-		return std::string();
+		return false;
 	}
-	
+
 	std::string line;
-	std::string content;
 
 	while (std::getline(input, line)) {
 		content += line;
@@ -43,7 +42,7 @@ static std::string readFile(const char *path){
 	}
 	
 	//input.close();
-	return content;
+	return true;
 }
 
 // If the substring is found, you get its starting index (0, 1, 2, …).
@@ -92,11 +91,12 @@ int main(int argc, char *argv[]){
 		std::cerr << "Error: <s1> is empty" << std::endl;
 		return 1;
 	}
-	std::string fileContent = readFile(argv[1]);
-	if (fileContent.empty())
+	std::string content;
+	
+	if (!readFile(argv[1], content))
 		return 1;
-	replaceContent(fileContent, s1, s2);
-	if (!writeFile(argv[1], fileContent)) 
+	replaceContent(content, s1, s2);
+	if (!writeFile(argv[1], content)) 
 		return 1;
 	
 	return 0;
