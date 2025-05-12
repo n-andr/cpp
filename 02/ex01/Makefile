@@ -6,7 +6,7 @@
 #    By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/01 21:16:06 by nandreev          #+#    #+#              #
-#    Updated: 2025/05/08 01:51:16 by nandreev         ###   ########.fr        #
+#    Updated: 2025/05/09 01:46:13 by nandreev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,12 +17,12 @@ CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 # Source files
-SRCS = main.cpp Harl.cpp
+SRCS = main.cpp Fixed.cpp
 
 OBJS = $(SRCS:.cpp=.o)
 
 # Executable name
-NAME = harl
+NAME = fixed
 
 all: $(NAME)
 
