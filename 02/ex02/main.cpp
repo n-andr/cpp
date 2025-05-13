@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 00:19:03 by nandreev          #+#    #+#             */
-/*   Updated: 2025/05/13 00:30:33 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/05/13 00:48:32 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,10 @@ int main( void ) {
 
 	// Fixed e(10);
 	// std::cout << "c == e: " << (c == e) << std::endl; // true
+	
+	// Fixed n(1);
+	// std::cout << n << std::endl;
+	// std::cout << ++n << std::endl;
 	
 	return 0;
 }
