@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScavTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 00:50:59 by nandreev          #+#    #+#             */
-/*   Updated: 2025/05/14 14:58:22 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/05/15 01:59:10 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,8 @@ public:
 
 	void attack(const std::string& target);
 	void guardGate();
+
+	static const unsigned int defaultEnergy = 50;
+
 };
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:42:53 by nandreev          #+#    #+#             */
-/*   Updated: 2025/05/14 16:15:41 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/05/15 01:40:31 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

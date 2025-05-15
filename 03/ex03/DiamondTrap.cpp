@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   DiamondTrap.cpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:42:49 by nandreev          #+#    #+#             */
-/*   Updated: 2025/05/14 16:20:01 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/05/15 01:59:37 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,32 @@
 
 DiamondTrap::DiamondTrap() 
 	: ClapTrap("unknown_clap_name"),
-	ScavTrap(),
-	FragTrap(),
+	ScavTrap("unknown_clap_name"),
+	FragTrap("unknown_clap_name"),
 	_name("unknown")
 {
-	_hitPoints = FragTrap::_hitPoints;
-	_energyPoints = ScavTrap::_energyPoints;
-	_attackDamage = FragTrap::_attackDamage;
-	std::cout << "DiamondTrap default constructor called" << std::endl;
+	this->_hitPoints = FragTrap::_hitPoints;
+	this->_energyPoints = ScavTrap::defaultEnergy;
+	this->_attackDamage = FragTrap::_attackDamage;
+	std::cout << "DiamondTrap " << _name << " default constructor called" << std::endl;
+	std::cout << "DiamondTrap _hitPoints: " << _hitPoints << std::endl;
+	std::cout << "DiamondTrap _energyPoints: " << _energyPoints << std::endl;
+	std::cout << "DiamondTrap _attackDamage: " << _attackDamage << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const std::string& name) 
 	: ClapTrap(name + "_clap_name"),
-	ScavTrap(name),
-	FragTrap(name),
+	ScavTrap(name + "_clap_name"),
+	FragTrap(name + "_clap_name"),
 	_name(name)
 {
-	_hitPoints = FragTrap::_hitPoints;
-	_energyPoints = ScavTrap::_energyPoints;
-	_attackDamage = FragTrap::_attackDamage;
-	std::cout << "DiamondTrap default constructor called" << std::endl;
+	this->_hitPoints = FragTrap::_hitPoints;
+	this->_energyPoints = ScavTrap::defaultEnergy;
+	this->_attackDamage = FragTrap::_attackDamage;
+	std::cout << "DiamondTrap " << _name << " default constructor called" << std::endl;
+	std::cout << "DiamondTrap _hitPoints: " << _hitPoints << std::endl;
+	std::cout << "DiamondTrap _energyPoints: " << _energyPoints << std::endl;
+	std::cout << "DiamondTrap _attackDamage: " << _attackDamage << std::endl;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap& other) 
