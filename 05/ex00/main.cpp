@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 02:40:19 by nandreev          #+#    #+#             */
-/*   Updated: 2025/07/22 18:43:53 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/07/23 01:26:47 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,8 @@ int main(){
 	{
 		std::cout << e.what() << std::endl;
 	}
+
+	std::cout << "\n\nTest: create Bureaucrat without a name" << std::endl;
+	Bureaucrat unknown;
+	std::cout << unknown << std::endl;
 }

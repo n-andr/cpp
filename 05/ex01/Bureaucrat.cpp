@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 02:20:30 by nandreev          #+#    #+#             */
-/*   Updated: 2025/07/23 01:21:56 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/07/24 20:33:55 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,15 @@ const char* Bureaucrat::GradeTooHighException::what() const throw(){
 
 const char* Bureaucrat::GradeTooLowException::what() const throw(){
 	return "Grade too low!";
+}
+
+
+void Bureaucrat::signForm(Form& form){
+	try{
+		form.beSigned(*this);
+		std::cout << *this << " signed " << form.getName() << std::endl;
+	}  catch (std::exception& e) {
+		std::cout << *this << " couldn’t sign " << form.getName() << " because " << e.what() << std::endl;
+
+	}
 }
