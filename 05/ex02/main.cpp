@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 02:40:19 by nandreev          #+#    #+#             */
-/*   Updated: 2025/08/01 01:05:47 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:05:07 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include <time.h>
 
 int main(){
 
-	std::srand(std::time(NULL)); //for rand() use current time as seed for random generator
+	std::srand(time(NULL)); //for rand() use current time as seed for random generator
 	Bureaucrat junior("John PleaseComeBackLater", 150);
 	Bureaucrat bigBoss("Mrs. Papers", 1);
 	
