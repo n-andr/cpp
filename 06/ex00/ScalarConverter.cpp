@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 18:40:40 by nandreev          #+#    #+#             */
-/*   Updated: 2025/08/05 22:44:14 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/09/02 17:05:32 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 #include <iomanip>   // for std::fixed and std::setprecision
 #include <cstdlib>   // for std::strtol, std::strtod, std::strtof
-// #include <climits>   // for INT_MAX, INT_MIN
-// #include <cfloat>    // for FLT_MAX
-// #include <cmath>     // for isnan, isinf
-// #include <cerrno>    // for errno
+#include <climits>   // for INT_MAX, INT_MIN
+//#include <cfloat>    // for FLT_MAX
+#include <cmath>     // for isnan, isinf std::fabs
+#include <cerrno>    // for errno
 
 ScalarConverter::ScalarConverter(){}
 ScalarConverter& ScalarConverter::operator=(const ScalarConverter&) {return *this;}
@@ -34,7 +34,7 @@ static bool isPseudoLiteral(std::string input){
 static int getPrecision(std::string s){
 	std::size_t dotPosition = s.find('.');
 	if (dotPosition == std::string::npos) return 1;
-	return static_cast<int>(s.length() - dotPosition - 1 - (s.back() == 'f' ? 1 : 0));
+	return static_cast<int>(s.length() - dotPosition - 1 - (s[s.length() - 1] == 'f' ? 1 : 0));
 	
 }
 
