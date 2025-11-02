@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 18:40:40 by nandreev          #+#    #+#             */
-/*   Updated: 2025/11/03 00:04:50 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/11/03 00:48:10 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ static std::string format_float(float v, int fixed_prec) {
     return os.str();
 }
 
+//setf - Set specific format flags, nothinf to do with float or double format
 static std::string format_double(double v, int fixed_prec) {
     std::ostringstream os;
     double a = v < 0 ? -v : v;
@@ -101,7 +102,7 @@ void ScalarConverter::convert(const std::string& input){
 
 		std::cout << "char: " << c << std::endl;
         std::cout << "int: " << i << std::endl;
-         std::cout << "float: " << f << "f" << std::endl;
+        std::cout << "float: " << f << "f" << std::endl;
         std::cout << "double: " << d << std::endl;
 		return;
 	}
@@ -203,7 +204,7 @@ void ScalarConverter::convert(const std::string& input){
 	endptr = 0;
 	double d = std::strtod(input.c_str(), &endptr);
 	if (*endptr == '\0') {
-        // NaN?
+        // NaN
         if (is_nan(d)) {
             std::cout << "char: impossible\nint: impossible\n";
             std::cout << "float: nanf\n";
@@ -211,7 +212,7 @@ void ScalarConverter::convert(const std::string& input){
             return;
         }
 
-        // +/-inf?  (C++98-safe check via numeric_limits)
+        // +/-inf
         const double posNif =  std::numeric_limits<double>::infinity();
         const double negInf = -std::numeric_limits<double>::infinity();
         if (d == posNif || d == negInf || errno == ERANGE) {
@@ -233,7 +234,7 @@ void ScalarConverter::convert(const std::string& input){
             d <= static_cast<double>(INT_MAX)) std::cout << "int: " << i << "\n";
         else                                   std::cout << "int: impossible\n";
 
-        // float line: show inff if it doesn't fit in float
+        // float show +-inff if it doesn't fit in float
         if (d >  std::numeric_limits<float>::max()) {
             std::cout << "float: inff\n";
         } else if (d < -std::numeric_limits<float>::max()) {
@@ -246,8 +247,7 @@ void ScalarConverter::convert(const std::string& input){
         // double line with smart formatting
         std::cout << "double: " << format_double(d, prec) << std::endl;
         return;
-	} else
-		std::cout << "fuck" << std::endl;
+	}
 	
 
 	std::cout << "Literal could not be converted" << std::endl;
