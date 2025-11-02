@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/13 02:40:19 by nandreev          #+#    #+#             */
-/*   Updated: 2025/08/03 01:10:41 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/08/08 15:56:50 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
+#include <time.h>
 
 int main(){
 
-	std::srand(std::time(NULL)); //for rand() use current time as seed for random generator
+	std::srand(time(NULL)); //for rand() use current time as seed for random generator
 	Bureaucrat junior("John PleaseComeBackLater", 150);
 	Bureaucrat boss("Mrs. Papers", 1);
 	Intern karl;

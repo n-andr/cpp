@@ -6,11 +6,11 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 19:00:57 by nandreev          #+#    #+#             */
-/*   Updated: 2025/08/03 19:03:42 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/11/02 23:11:01 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ScalarConverter.hpp"
+#include "include/ScalarConverter.hpp"
 
 int main(int argc, char *argv[]){
 	if (argc != 2) {

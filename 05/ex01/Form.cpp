@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 18:56:47 by nandreev          #+#    #+#             */
-/*   Updated: 2025/07/25 00:16:11 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/08/08 15:56:14 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ const char* Form::GradeTooHighException::what() const throw(){
 }
 
 const char* Form::GradeTooLowException::what() const throw(){
-	return "Form grade too high!";
+	return "Form grade too low!";
 }
 
 const char* Form::FormAlreadySigned::what() const throw(){
