@@ -6,12 +6,15 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 18:40:54 by nandreev          #+#    #+#             */
-/*   Updated: 2025/08/03 22:27:15 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/11/02 14:43:40 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string>
-#include <iostream>
+#ifndef SCALARCONVERTER_HPP
+# define SCALARCONVERTER_HPP
+
+# include <string>
+# include <iostream>
 
 
 class ScalarConverter
@@ -26,3 +29,4 @@ public:
 	static void convert(const std::string& input);
 };
 
+#endif
