@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ScalarConverter.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 18:40:40 by nandreev          #+#    #+#             */
-/*   Updated: 2025/11/03 00:48:10 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/11/03 20:02:47 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
 #include <climits>   // for INT_MAX, INT_MIN
 // #include <cfloat>    // for FLT_MAX
 // #include <cmath>     // for isnan, isinf
-// #include <cerrno>    // for errno
+# include <cerrno>    // for errno
 # include <sstream>	// for std::ostringstream
+# include <limits>
+
 
 
 ScalarConverter::ScalarConverter(){}
