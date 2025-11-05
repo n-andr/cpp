@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/03 18:40:40 by nandreev          #+#    #+#             */
-/*   Updated: 2025/11/03 20:02:47 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/11/05 12:23:12 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 #include <iomanip>   // for std::fixed and std::setprecision
 #include <cstdlib>   // for std::strtol, std::strtod, std::strtof
-// #include <cmath>    // for finite()
 // #include <math.h>
 #include <climits>   // for INT_MAX, INT_MIN
 // #include <cfloat>    // for FLT_MAX
@@ -112,44 +111,10 @@ void ScalarConverter::convert(const std::string& input){
 	char* endptr = NULL;
 	errno = 0;
 	int prec = getPrecision(input);
-	//int
-
-	
-	// long l = std::strtol(input.c_str(), &endptr, 10); // sets errno to ERANGE if overflow/underflow of long
-	// if (*endptr == '\0' && errno != ERANGE)
-	// {
-	// 	float f = static_cast<float>(l);
-    //     double d = static_cast<double>(l);
-		
-	// 	if(l < INT_MIN || l > INT_MAX){
-	// 		std::cout << "char: impossible" << std::endl;
-    //     	std::cout << "int: impossible" << std::endl;
-	// 	} else {
-	// 		int i = static_cast<int>(l);
-	// 		if (i >= 32 && i <= 126)
-	// 			std::cout << "char: '" << static_cast<char>(i) << "'" << std::endl;
-	// 		else if (i >= 0 && i <= 127)
-	// 			std::cout << "char: Non displayable" << std::endl;
-	// 		else
-	// 			std::cout << "char: impossible" << std::endl;
-	// 		std::cout << "int: " << i << std::endl;
-	// 	}
-	// 	std::cout << std::fixed << std::setprecision(prec) << "float: " << f << "f" ;
-	// 	if (static_cast<double>(f) != d)
-    //     	std::cout << " (warning: precision loss)"; // can happen if int length is more than 7 digits
-    // 	std::cout << std::endl;
-    //     std::cout << std::fixed << std::setprecision(prec) << "double: " << d << std::endl;
-	// 	return;
-	// }
-
-
-
 	
 	//float
 	errno = 0;
-	// float f = std::strtof(input.c_str(), &endptr);
 	if (!input.empty() && input[input.size()-1] == 'f') {
-   		// parse the numeric part with strtod (more portable than strtof)
 		std::string core = input.substr(0, input.size()-1);
 		double d = std::strtod(core.c_str(), &endptr);
 

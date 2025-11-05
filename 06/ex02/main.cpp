@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/05 23:58:06 by nandreev          #+#    #+#             */
-/*   Updated: 2025/08/06 01:45:33 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/11/05 12:43:44 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "include/C.hpp"
 #include <iostream>
 #include <cstdlib> // rand, srand
+#include <ctime>	// for std::time()
 
 // It randomly instantiates A, B, or C and 
 // returns the instance as a Base pointer.
@@ -84,17 +85,17 @@ void identify(Base& p){
 		(void)dynamic_cast<A&>(p);
 		std::cout << "Type A" << std::endl;
 		return;
-	} catch (std::bad_cast&) {}
+	} catch (...) {}
 	try {
 		(void)dynamic_cast<B&>(p);
 		std::cout << "Type B" << std::endl;
 		return;
-	} catch (std::bad_cast&) {}
+	} catch (...) {}
 	try {
 		(void)dynamic_cast<C&>(p);
 		std::cout << "Type C" << std::endl;
 		return;
-	} catch (std::bad_cast&) {}
+	} catch (...) {}
 
 	std::cout << "Unknown type" << std::endl;
 	
