@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 23:48:16 by nandreev          #+#    #+#             */
-/*   Updated: 2025/11/04 23:55:09 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/11/13 20:13:26 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main( void )
 	std::cout << "c = " << c << ", d = " << d << std::endl;
 	std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
 	std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+	//std::cout << "Error, will not compile" << ::max(a, c);
 	return 0; 
 }
 
