@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
+/*   By: nandreev <nandreev@student.42berlin.de     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 23:48:10 by nandreev          #+#    #+#             */
-/*   Updated: 2025/11/05 01:00:27 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/11/17 14:37:57 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 // Non-const: allows the callable to modify elements
 template<typename T>
-void iter(T *array, std::size_t len, void(*f)(T &element)){
+void iter(T *array, const std::size_t len, void(*f)(T &element)){
 	for (std::size_t i = 0; i < len; ++i){
 		f(array[i]);
 	}
@@ -28,7 +28,7 @@ void iter(T *array, std::size_t len, void(*f)(T &element)){
 
 // Const: works with const arrays
 template<typename T>
-void iter(const T *array, std::size_t len, void(*f)(const T &element)){
+void iter(const T *array, const std::size_t len, void(*f)(const T &element)){
 	for (std::size_t i = 0; i < len; ++i){
 		f(array[i]);
 	}
