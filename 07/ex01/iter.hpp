@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 23:48:10 by nandreev          #+#    #+#             */
-/*   Updated: 2025/11/18 21:51:47 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/11/19 00:29:15 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void iter(T *array, const std::size_t len, F f){
 }
 
 // Const: works with const arrays
-template<typename T, typename F>
-void iter(const T *array, const std::size_t len, F f){
-	for (std::size_t i = 0; i < len; ++i){
-		f(array[i]);
-	}
-}
+// template<typename T, typename F>
+// void iter(const T *array, const std::size_t len, F f){
+// 	for (std::size_t i = 0; i < len; ++i){
+// 		f(array[i]);
+// 	}
+// }
 
 #endif

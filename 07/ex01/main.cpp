@@ -6,7 +6,7 @@
 /*   By: nandreev <nandreev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/04 23:48:16 by nandreev          #+#    #+#             */
-/*   Updated: 2025/11/19 00:22:12 by nandreev         ###   ########.fr       */
+/*   Updated: 2025/11/19 00:30:54 by nandreev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ int main( void )
 	iter(nums, 3, printT<int>);
 	std::cout << "\n";
 	//iter(words, 3, addOne<std::string>); //will error on compilation
-	//iter(words, 2, printT<std::string>);
-	//std::cout << "\n";
 
 	const int constNums[] = {42, 43, 44};
 	std::cout << "test 3 const array (read only)\n\n";
