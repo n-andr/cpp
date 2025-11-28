@@ -9,12 +9,16 @@
 
 int main(){
 	std::cout << "\n\n";
+	std::cout << "--- Test vector\n";
 	{
 		std::vector<int> vectorContainer(10);
 
-		std::iota (std::begin(vectorContainer), std::end(vectorContainer), 10); //Fill with 10, 11, ..., 19
+		//std::iota (std::begin(vectorContainer), std::end(vectorContainer), 10); //Fill with 10, 11, ..., 19
+		for (size_t i = 0; i < vectorContainer.size(); ++i)
+    		vectorContainer[i] = 10 + i;
+
 		std::cout << "Vector Container has:";
-		for (int i = 0; vectorContainer[i]; i++) std::cout << " " << vectorContainer[i];
+		for (size_t i = 0; i < vectorContainer.size(); ++i) std::cout << " " << vectorContainer[i];
 		std::cout << "\n";
 		try{
 			//value found -> print to which valie is iterator pointing
@@ -40,13 +44,14 @@ int main(){
 			std::cout << "Inserting 999 before element 130 (usung iterator from easyfind)" << std::endl;
 			vectorContainer.insert(it, 999); //The returned iterator becomes invalid after insertion
 			std::cout << "Updated Vector:";
-			for (int i = 0; vectorContainer[i]; i++) std::cout << " " << vectorContainer[i];
+			for (size_t i = 0; i < vectorContainer.size(); ++i) std::cout << " " << vectorContainer[i];
 			std::cout << "\n";
 		} catch (const std::runtime_error& e) {
 			std::cerr << e.what() <<std::endl;
 		}
 	}
 	std::cout << "\n\n";
+	std::cout << "--- Test list\n";
 	{
 		std::list<int> l;
 		l.push_back(7);
@@ -83,6 +88,7 @@ int main(){
 		}
 	}
 	std::cout << "\n\n";
+	std::cout << "--- Test deque\n";
 	{
 		std::deque<int> dq;
 		dq.push_back(100);
@@ -109,6 +115,7 @@ int main(){
 		}
 	}
 	std::cout << "\n\n";
+	std::cout << "--- Test string\n";
 	{
     std::string s = "hello_world";
 
@@ -118,7 +125,7 @@ int main(){
         std::cout << "Searching for 'o' (ASCII 111)" << std::endl;
         std::string::iterator it = easyfind(s, 'o');  // works because char → int
         std::cout << "Found char: " << *it << std::endl;
-		std::cout << "Inserting X before 'o'" << std::endl;
+		std::cout << "Inserting _ before 'o'" << std::endl;
     	s.insert(it, '_'); //Iterator invalidation
 		std::cout << "Updated string: " << s << std::endl;
 

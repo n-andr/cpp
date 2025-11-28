@@ -2,6 +2,8 @@
 # define EASYFIND_HPP
 
 # include <algorithm>
+# include <stdexcept> //std::runtime_error
+
 
 /*
 Iterators are:
