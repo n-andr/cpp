@@ -30,7 +30,7 @@ void BitcoinExchange::parseData(){
 		//check header
 		std::string line;
 		std::getline(file, line);
-		checkHeader(line);
+		checkHeader(line, DATA_FILE_HEADER);
 
 		//check line by line and skipe empty lines
 		while (std::getline(file, line))
@@ -43,7 +43,8 @@ void BitcoinExchange::parseData(){
 			checkValue(value);
 			if(_dataMap.find(date) != _dataMap.end()) 
 				throw std::runtime_error("Error: duplicate date => " + date);
-			_dataMap[date] = value;
+			
+			_dataMap[date] = std::strtod(value.c_str(), NULL);
 		}
 	}
 	catch(const std::runtime_error& e)
@@ -57,12 +58,56 @@ void BitcoinExchange::parseData(){
 }
 void BitcoinExchange::parseInputAndConvert(){
 
+	std::ifstream file(_inputFile);
+
+    if (!file.is_open()) {
+        std::cerr << "Error: could not open input file." << std::endl;
+        exit (1);
+    }
+	std::string line;
+	std::getline(file, line);
+	try
+		{checkHeader(line, INPUT_FILE_HEADER);}
+	catch(const std::exception& e) 
+		{std::cerr << e.what() << '\n';}
+
+	//check line by line and skipe empty lines
+	while (std::getline(file, line))
+	{
+		if(line.empty()) continue;
+		try
+		{
+			std::string date;
+			std::string value; 
+			splitLine(line, date, value, '|');
+			checkDate(date);
+			checkValue(value);
+			//this check needs to be performed on input file value
+			double amount = std::strtod(value.c_str(), NULL);
+			if (amount > 1000.0)
+				throw std::runtime_error("Error: too large a number.");
+			std::map<std::string, double>::iterator it = _dataMap.lower_bound(date);
+			if (it == _dataMap.end()) --it;
+			else if (it->first != date) { //it->first is the key in the map (the date)
+				if (it == _dataMap.begin())
+					throw std::runtime_error("Error: no earlier data for date => " + date);
+				it--;
+			}
+			double result = amount * it->second;
+			std::cout << date << " => " << amount << " = " << result << std::endl;
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+	}	
 }
 
 
-void BitcoinExchange::checkHeader(std::string &header){
+void BitcoinExchange::checkHeader(std::string &header, const std::string &expected){
 	if (header.empty()) throw std::runtime_error("Header is missing") ;
-	if (header != DATA_FILE_HEADER) throw std::runtime_error("Header mismatch. Expected:" + DATA_FILE_HEADER) ;
+	if (header != expected) throw std::runtime_error("Header mismatch. Expected: " + expected);
+
 }
 
 static void trim(std::string &s)
@@ -75,18 +120,6 @@ static void trim(std::string &s)
     while (!s.empty() && (s[s.size() - 1] == ' ' || s[s.size() - 1] == '\t'))
         s.erase(s.size() - 1, 1);
 }
-
-/*Date format:
-YYYY-MM-DD
-Check:
-length 10
-digits at positions 0–3, 5–6, 8–9
-'-' at positions 4 and 7
-
-1 ≤ month ≤ 12
-1 ≤ day ≤ days_in_month(month, year)
-February leap year rule
-*/
 
 void BitcoinExchange::checkDate(std::string &date){
 	
@@ -133,25 +166,15 @@ void BitcoinExchange::splitLine(const std::string &line, std::string &date, std:
         throw std::runtime_error("Error: bad input => " + line);
 }
 
-
-/*
-beteen 0 an 1000 (can be float)
-*/
 void BitcoinExchange::checkValue(std::string &value){
 	trim(value);
 	if (value[0] == '-')
         throw std::runtime_error("Error: not a positive number.");
-	std::string::size_type dotPos = value.find('.');
-	for (size_t i = 0; i < value.length(); ++i)
-    {
-        if (i == dotPos)
-			continue;
-        else if (!std::isdigit(value[i]))
-        {
-            throw std::runtime_error("Error: bad input => " + value);
-        }
-    }
-	float f = std::atof(value.c_str());
-    if (f > 1000.0f)
-        throw std::runtime_error("Error: too large a number.");
+	// Use strtod for numeric validation
+    char *endptr = NULL;
+    std::strtod(value.c_str(), &endptr);
+
+    // strtod stops at first invalid char check that everything was consumed
+    if (*endptr != '\0')
+        throw std::runtime_error("Error: bad input => " + value);
 }

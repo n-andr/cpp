@@ -5,8 +5,11 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstdlib>		// for strtod()
 
 #define DATA_FILE_HEADER "date,exchange_rate"
+#define INPUT_FILE_HEADER "date | value"
+
 
 class BitcoinExchange
 {
@@ -24,10 +27,10 @@ public:
 	void parseData();
 	void parseInputAndConvert();
 
-	void checkHeader(std::string &header);
+	void checkHeader(std::string &header, const std::string &expected);
 	void checkDate(std::string &date);
 	void checkValue(std::string &value);
-	void splitLine(std::string &line, std::string &date, std::string &value, char delimiter) const;
+	void splitLine(const std::string &line, std::string &date, std::string &value, char delimiter) const;
 
 };
 
