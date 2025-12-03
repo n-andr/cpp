@@ -1,4 +1,5 @@
 #include "BitcoinExchange.hpp"
+#define DATABASEFILE "data.csv"
 
 int main (int argc, char **argv){
 
@@ -7,5 +8,8 @@ int main (int argc, char **argv){
 		return 1;
 	}
 
-	
+	BitcoinExchange btc(DATABASEFILE, argv[1]);
+	btc.parseData();
+	btc.parseInputAndConvert();
+
 }
