@@ -61,20 +61,16 @@ void PmergeMe::sortVector(){
 
 std::vector<int> PmergeMe::recurseVector(std::vector<int> input){
 
-    static int depth = 0; 	// static = shared between all recursion levels (for indentation)
-
-	//delete
-	std::string indent(depth * 2, ' ');
-
     // ---- Debug: entering ----
-    std::cout << indent << "recurseVector(depth=" << depth << ") called with input:";
+    std::cout << "recurseVector called with input:";
     print(input);
 
 	//end delete
 	const size_t n = input.size();
 
-	if (n <= 1){std::cout << indent << "Base case (n <= 1), returning:";
+	if (n <= 1){
         return input;}
+	std::vector<Pair> pairs;
 	std::vector<int> larger;
 	std::vector<int> pending;
 
@@ -82,118 +78,161 @@ std::vector<int> PmergeMe::recurseVector(std::vector<int> input){
 	for (size_t i = 0; i + 1 < n; i += 2) {
 		int a = input[i];
 		int b = input[i + 1];
-        std::cout << indent << "  Pair (" << a << ", " << b << ") -> ";
+        std::cout << "  Pair (" << a << ", " << b << ") -> ";
 
-		if (a < b) {
-			pending.push_back(a);
-			larger.push_back(b);
-			            std::cout << "pending += " << a << ", larger += " << b << std::endl;
+		Pair p;
+        if (a < b) {
+            p.small = a;
+            p.large = b;
+        } else {
+            p.small = b;
+            p.large = a;
+        }
 
-		} else {
-			pending.push_back(b);
-			larger.push_back(a);
-			            std::cout << "pending += " << b << ", larger += " << a << std::endl;
-
-		}
+        pairs.push_back(p);
+        larger.push_back(p.large);
+        pending.push_back(p.small);
 	}
+	
+	std::vector<int> mainChain = recurseVector(larger);
+	std::cout << "Back from recursion, mainChain now:";
+    print(mainChain);
+	pending = alignPendWithMain(mainChain, pairs);
 
 	if (n % 2 == 1)
 	{
 		int leftover = input[n - 1];
         pending.push_back(leftover);
-        std::cout << indent << "Odd leftover -> pending += " << leftover << std::endl;
+        std::cout << "Odd leftover -> pending += " << leftover << std::endl;
 	}
 	
-	 //std::cout << indent << "Recurse on larger..." << std::endl;
-    ++depth;
-	std::vector<int> mainChain = recurseVector(larger);
-    --depth;
-
-	indent = std::string(depth * 2, ' '); // recompute indent for this level
-
-    std::cout << indent << "Back from recursion at depth=" << depth
-              << ", mainChain now:";
-    print(mainChain);
-    // -----------------------------------------
-    // 3. Insert pend elements into mainChain
-    //    (Jacobsthal + binary insertion)
-    // -----------------------------------------
-    insertPendIntoMainVector(mainChain, pending);
-	std::cout << indent << "Returning from depth=" << depth << " with chain:";
+    insertPendIntoMainVector(mainChain, pending, pairs);
+	std::cout << "Returning with chain:";
     print(mainChain);
 
     return mainChain;
 }
 
-void PmergeMe::insertPendIntoMainVector(std::vector<int> &mainChain,
-                                  const std::vector<int> &pend)
+std::vector<int> PmergeMe::alignPendWithMain(const std::vector<int> &mainChain, const std::vector<Pair> &pairs)
+{
+    std::vector<int> alignedPend;
+
+    for (size_t i = 0; i < mainChain.size(); ++i) {
+        int l = mainChain[i];
+
+        for (size_t j = 0; j < pairs.size(); ++j) {
+            if (pairs[j].large == l) {
+                alignedPend.push_back(pairs[j].small);
+                break;
+            }
+        }
+    }
+
+    return alignedPend;
+}
+
+
+void PmergeMe::insertPendIntoMainVector(std::vector<int> &mainChain, const std::vector<int> &pend, std::vector<Pair> &pairs)
 {
     if (pend.empty())
         return;
 
+	// Build Jacobsthal numbers
+	std::vector<size_t> j_seq = buildJacobsthalIndicesVec(pend.size());
+	std::vector<size_t> order = completeInsertionOrder(j_seq, pend.size());
+
 	for (size_t i = 0; i < pend.size(); ++i) {
-        int value = pend[i];
+		size_t pendIndex = order[i];
+        int value = pend[pendIndex]; // the value we need to insert
 
-		std::cout << "Insert pend[" << i << "] = " << value << std::endl;
-
-        // ---- binary search ----
-        size_t left = 0;
-        size_t right = mainChain.size();
-
-        while (left < right) {
-            size_t mid = (left + right) / 2;
-			 std::cout << "  BS: left=" << left
-                      << " mid=" << mid
-                      << " right=" << right
-                      << " | comparing " << value
-                      << " with " << mainChain[mid]
-                      << std::endl;
-            if (value < mainChain[mid])
-                right = mid;
-            else
-                left = mid + 1;
+		 // ------- find its matching large -------
+        int large = -1;
+        for (size_t k = 0; k < pairs.size(); ++k) {
+            if (pairs[k].small == value) {
+                large = pairs[k].large;
+                break;
+            }
         }
-		std::cout << "  -> insert at position " << left << std::endl;
 
-        // ---- insert into vector ----
-        mainChain.insert(mainChain.begin() + left, value);
-
-		std::cout << "  mainChain: ";
-        for (size_t j = 0; j < mainChain.size(); ++j)
-            std::cout << mainChain[j] << " ";
-        std::cout << std::endl << std::endl;
+        // ------- find insertion window -------
+        int rightPos = -1;
+        if (large != -1) {
+            for (size_t pos = 0; pos < mainChain.size(); ++pos) {
+                if (mainChain[pos] == large) {
+                    rightPos = pos;
+                    break;
+                }
+            }
+        }
+        // ---- binary search ----
+		binaryInsert(mainChain, value, rightPos);
 	}
 }
 
 
 
-// std::vector<int> PmergeMe::buildJacobsthalVec(size_t n){
+std::vector<size_t> PmergeMe::buildJacobsthalIndicesVec(size_t n){
 
-// 	std::vector<int> seq;
+	std::vector<size_t> j_seq;
 
-// 	// Jacobsthal numbers: J(1) = 1, J(2) = 3
-//     size_t j_prev = 1;
-//     size_t j_curr = 3;
+	// Jacobsthal numbers: 
+	// 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731, 5461, 10923, …
 
-//     // Add J(1)
-//     if (j_prev <= n)
-//         order.push_back(j_prev - 1);
+    size_t j_prev = 0;
+    size_t j_curr = 1;
 
-//     // Add J(2)
-//     if (j_curr <= n)
-//         order.push_back(j_curr - 1);
+	size_t j_next = j_curr + 2 * j_prev;
+    while (j_next <= n) {
+		j_seq.push_back(j_next);
 
-//     // Add higher Jacobsthal indices
-//     while (true) {
-//         size_t j_next = j_curr + 2 * j_prev;
+		j_prev = j_curr;
+		j_curr = j_next;
+		j_next = j_curr + 2 * j_prev;
+	}
+	return j_seq;
+}
 
-//         if (j_next > n)
-//             break;
+std::vector<size_t> PmergeMe::completeInsertionOrder(const std::vector<size_t> &j_seq, size_t n)
+{
+    std::vector<size_t> order;
+    std::vector<bool> used(n, false);
 
-//         order.push_back(j_next - 1);
+	// indices, based on Jacobsthal numbers are:
+	// 0 2 4 10 20 42 84 170 340 682 1364 2730 5460 10922 ...
 
-//         j_prev = j_curr;
-//         j_curr = j_next;
-//     }
-// 	return seq;
-// }
+    for (size_t i = 0; i < j_seq.size(); ++i) {
+        size_t idx = j_seq[i] - 1;      // convert “1 → 0”, “3 → 2”
+        if (idx < n) {
+            order.push_back(idx);
+            used[idx] = true;
+        }
+    }
+
+    // Add missing indices
+	// 1 3 5 6 7 8 9 ...
+    for (size_t i = 0; i < n; ++i) {
+        if (!used[i])
+            order.push_back(i);
+    }
+
+    return order;
+}
+
+
+void PmergeMe::binaryInsert(std::vector<int> &mainChain, int value, int rightPos)
+{
+    size_t left = 0;
+    size_t right = mainChain.size();
+	if (rightPos != -1) right = rightPos;
+
+    while (left < right) {
+        size_t mid = (left + right) / 2;
+
+        if (value < mainChain[mid])
+            right = mid;
+        else
+            left = mid + 1;
+    }
+
+    mainChain.insert(mainChain.begin() + left, value);
+}

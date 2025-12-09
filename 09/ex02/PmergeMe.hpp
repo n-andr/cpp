@@ -18,6 +18,10 @@ private:
 	std::vector<int> _vec;
 	std::deque<int> _deq;
 	//int _size;
+	struct Pair {
+        int small;
+        int large;
+    };
 public:
 	PmergeMe();
 	PmergeMe(const PmergeMe& other);
@@ -28,8 +32,11 @@ public:
 	void fillContainers(int argc, char** argv);
 	void sortVector();
 	std::vector<int> recurseVector(std::vector<int> vec);
-	void insertPendIntoMainVector(std::vector<int> &mainChain, const std::vector<int> &pend);
-	std::vector<int> buildJacobsthalVec(size_t n);
+	void insertPendIntoMainVector(std::vector<int> &mainChain, const std::vector<int> &pend, std::vector<Pair> &pairs);
+	std::vector<size_t> buildJacobsthalIndicesVec(size_t n);
+	void binaryInsert(std::vector<int> &mainChain, int value, int rightPos);
+	std::vector<int> alignPendWithMain(const std::vector<int> &mainChain, const std::vector<Pair> &pairs);
+	std::vector<size_t> completeInsertionOrder(const std::vector<size_t> &jac, size_t n);
 
 	template <typename T>
 	void print(const T &container){
@@ -38,5 +45,6 @@ public:
 		std::cout << std::endl;
 	}
 };
+
 
 #endif

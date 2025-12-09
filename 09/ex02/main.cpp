@@ -14,6 +14,8 @@ int	main(int argc, char** argv)
 		sorter.checkArgs(argc, argv);
 		sorter.fillContainers(argc, argv);
 		sorter.sortVector();
+
+		sorter.print(sorter.completeInsertionOrder(sorter.buildJacobsthalIndicesVec(100), 100));
 		
 		
 	}
