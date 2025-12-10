@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <cstdlib>		// for strtod()
+#include <stdexcept>
 
 #define DATA_FILE_HEADER "date,exchange_rate"
 #define INPUT_FILE_HEADER "date | value"

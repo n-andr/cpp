@@ -128,7 +128,7 @@ std::vector<int> PmergeMe::alignPendWithMain(const std::vector<int> &mainChain, 
 void PmergeMe::insertPendIntoMainVector(std::vector<int> &mainChain, const std::vector<int> &pend, std::vector<Pair> &pairs)
 {
     if (pend.empty())
-        return;
+        {return;}
 
 	// Build Jacobsthal numbers
 	std::vector<size_t> j_seq = buildJacobsthalVec(pend.size());
@@ -209,7 +209,15 @@ std::vector<size_t> PmergeMe::completeInsertionOrder( std::vector<size_t> &bound
                 order.push_back(index0);
         }
     }
-
+	// Example output for n = 100:
+	// 0 
+	// 2 1 
+	// 4 3 
+	// 10 9 8 7 6 5 
+	// 20 19 18 17 16 15 14 13 12 11 
+	// 42 41 40 39 38 37 36 35 34 33 32 31 30 29 28 27 26 25 24 23 22 21 
+	// 84 83 82 81 80 79 78 77 76 75 74 73 72 71 70 69 68 67 66 65 64 63 62 61 60 59 58 57 56 55 54 53 52 51 50 49 48 47 46 45 44 43 
+	// 99 98 97 96 95 94 93 92 91 90 89 88 87 86 85
     return order;
 }
 
@@ -323,7 +331,7 @@ std::deque<int> PmergeMe::alignPendWithMainDeque(const std::deque<int> &mainChai
 void PmergeMe::insertPendIntoMainDeque(std::deque<int> &mainChain, const std::deque<int> &pend, std::deque<Pair> &pairs)
 {
     if (pend.empty())
-        return;
+        {return;}
 
 	// Build Jacobsthal numbers
 	std::deque<size_t> j_seq = buildJacobsthalDeque(pend.size());

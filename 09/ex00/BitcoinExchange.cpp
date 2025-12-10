@@ -19,7 +19,7 @@ BitcoinExchange&  BitcoinExchange::operator=(const BitcoinExchange& other){
 
 void BitcoinExchange::parseData(){
 	//open
-	std::ifstream file(_dataFile);
+	std::ifstream file(_dataFile.c_str());
 
     if (!file.is_open()) {
         std::cerr << "Error: could not open data file." << std::endl;
@@ -58,7 +58,7 @@ void BitcoinExchange::parseData(){
 }
 void BitcoinExchange::parseInputAndConvert(){
 
-	std::ifstream file(_inputFile);
+	std::ifstream file(_inputFile.c_str());
 
     if (!file.is_open()) {
         std::cerr << "Error: could not open input file." << std::endl;
@@ -146,24 +146,25 @@ void BitcoinExchange::checkDate(std::string &date){
 	//Leap year - Feb has 29 days. Year is divisible by 4, BUT if it is divisible by 100 then  Not Leap, BUT if it is also divisible by 400 → then it is a leap year.
 	bool isLeap = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
     if (isLeap)
-        daysInMonth[1] = 29;
+       { daysInMonth[1] = 29;}
 
     if (day < 1 || day > daysInMonth[month - 1])
-        throw std::runtime_error("Error: bad date => " + date);
+        {throw std::runtime_error("Error: bad date => " + date);}
+
 	if (year < 2009)
-		throw std::runtime_error("Error: no Bitcoin before 2009 => " + date);
+		{throw std::runtime_error("Error: no Bitcoin before 2009 => " + date);}
 }
  
 void BitcoinExchange::splitLine(const std::string &line, std::string &date, std::string &value, char delimiter) const {
 	std::string::size_type pos = line.find(delimiter);
     if (pos == std::string::npos)
-        throw std::runtime_error("Error: bad input => " + line);
+        {throw std::runtime_error("Error: bad input => " + line);}
 	
 	date = line.substr(0, pos);
     value = line.substr(pos + 1);
 
 	if (date.empty() || value.empty())
-        throw std::runtime_error("Error: bad input => " + line);
+        {throw std::runtime_error("Error: bad input => " + line);}
 }
 
 void BitcoinExchange::checkValue(std::string &value){
