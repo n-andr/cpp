@@ -12,12 +12,8 @@ int	main(int argc, char** argv)
 	{
 		PmergeMe sorter;
 		sorter.checkArgs(argc, argv);
-		sorter.fillContainers(argc, argv);
-		sorter.sortVector();
-
-		sorter.print(sorter.completeInsertionOrder(sorter.buildJacobsthalIndicesVec(100), 100));
-		
-		
+		sorter.sortVector(argc, argv);
+		sorter.sortDeque(argc, argv);
 	}
 	catch(const std::exception& e)
 	{
